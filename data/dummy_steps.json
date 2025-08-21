@@ -1,0 +1,94 @@
+{
+  "reset password": [
+    "Go to the company login portal at portal.company.com",
+    "Click on 'Forgot Password' link below the login form",
+    "Enter your registered email address or employee ID",
+    "Check your email for the password reset link (may take 2-3 minutes)",
+    "Click the reset link and set a new secure password (min 8 characters with uppercase, lowercase, numbers, and symbols)",
+    "Log in with your new password and update any saved passwords in your browser"
+  ],
+  "install vpn": [
+    "Open the company software center or download portal",
+    "Search for 'Corporate VPN Client' or 'Cisco AnyConnect'",
+    "Click 'Install' and wait for download completion",
+    "Run the installer with administrator privileges",
+    "Launch the VPN app from your desktop or start menu",
+    "Enter the server address: vpn.company.com",
+    "Log in with your company credentials",
+    "Click 'Connect' and verify connection status"
+  ],
+  "email not working": [
+    "Check if you're connected to the internet (try opening a website)",
+    "Restart your email client (Outlook, Thunderbird, etc.)",
+    "Verify your email settings: incoming server, outgoing server, and ports",
+    "Check if your mailbox is full (delete old emails if needed)",
+    "Disable antivirus email scanning temporarily to test",
+    "Try accessing email through webmail (webmail.company.com)",
+    "If still not working, contact IT with specific error messages"
+  ],
+  "printer not working": [
+    "Check if the printer is powered on and displays 'Ready' status",
+    "Verify the printer is connected to the network (check ethernet cable or WiFi)",
+    "Ensure your computer and printer are on the same network",
+    "Update or reinstall printer drivers from the manufacturer's website",
+    "Clear the print queue: Control Panel > Devices and Printers > right-click printer > See what's printing > clear all",
+    "Run Windows printer troubleshooter: Settings > Update & Security > Troubleshoot",
+    "Try printing a test page from printer properties"
+  ],
+  "slow computer": [
+    "Restart your computer to clear memory and temporary files",
+    "Check available disk space (should have at least 15% free)",
+    "Run disk cleanup: type 'disk cleanup' in start menu and select your main drive",
+    "Check for Windows updates: Settings > Update & Security > Windows Update",
+    "Scan for malware using Windows Defender or company antivirus",
+    "Close unnecessary startup programs: Task Manager > Startup tab",
+    "Consider upgrading RAM if computer is older than 4 years"
+  ],
+  "wifi not connecting": [
+    "Restart your WiFi adapter: Network settings > Change adapter options > disable/enable WiFi",
+    "Forget and reconnect to the network: WiFi settings > manage known networks > forget network",
+    "Check if other devices can connect to the same network",
+    "Restart your router/modem (unplug for 30 seconds, then plug back in)",
+    "Update WiFi drivers through Device Manager",
+    "Reset network settings: Settings > Network & Internet > Status > Network reset",
+    "Contact network administrator if corporate WiFi issues persist"
+  ],
+  "blue screen": [
+    "Note down the STOP error code if visible (e.g., 0x000000XX)",
+    "Restart the computer in Safe Mode: hold Shift while clicking Restart",
+    "Check for recent hardware or software changes",
+    "Run System File Checker: open Command Prompt as admin, type 'sfc /scannow'",
+    "Check Windows Event Viewer for error details",
+    "Update all device drivers, especially graphics and network drivers",
+    "Run memory diagnostic: type 'mdsched' in start menu and restart when prompted",
+    "If recurring, contact IT support with error codes and recent change details"
+  ],
+  "software installation": [
+    "Check if you have administrator rights on your computer",
+    "Download software only from official websites or company approved sources",
+    "Temporarily disable antivirus during installation if it's blocking",
+    "Right-click installer and select 'Run as administrator'",
+    "Check system requirements match your computer specifications",
+    "Close all other programs before installation",
+    "Restart computer after installation if prompted",
+    "Contact IT if software requires special licensing or corporate approval"
+  ],
+  "access denied": [
+    "Verify you're using the correct username and password",
+    "Check if your account has been locked or disabled",
+    "Ensure you have permission to access the specific file/folder/system",
+    "Try accessing as administrator: right-click > Run as administrator",
+    "Check with your manager if you need additional permissions",
+    "Clear browser cache and cookies if it's a web application",
+    "Contact IT support to verify your account status and permissions"
+  ],
+  "backup data": [
+    "Identify critical files: documents, pictures, work files",
+    "Use company-approved backup solution (OneDrive, Google Drive, or network drive)",
+    "For local backup: use external hard drive or USB drive",
+    "Set up automatic backup schedule in backup software",
+    "Test restore process to ensure backups are working",
+    "Store backup device in a different location than your computer",
+    "Follow company data retention and security policies"
+  ]
+}

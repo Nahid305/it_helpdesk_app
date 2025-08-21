@@ -1,0 +1,387 @@
+/* Professional IT Helpdesk Styles - Optimized for Low Carbon Footprint */
+
+/* === ENERGY-EFFICIENT DESIGN === */
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #64748b;
+    --success-color: #059669;
+    --warning-color: #d97706;
+    --error-color: #dc2626;
+    --background-light: #ffffff;
+    --background-dark: #0f172a;
+    --text-light: #1e293b;
+    --text-dark: #f1f5f9;
+}
+
+/* === MAIN LAYOUT === */
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* Light theme (default - more energy efficient for most displays) */
+.stApp {
+    background-color: var(--background-light);
+    color: var(--text-light);
+    min-height: 100vh;
+}
+
+/* Dark mode support (saves energy on OLED displays) */
+@media (prefers-color-scheme: dark) {
+    .stApp {
+        background-color: var(--background-dark);
+        color: var(--text-dark);
+    }
+    
+    .stSidebar > div {
+        background-color: #1e293b;
+    }
+}
+
+/* === SIMPLIFIED PROFESSIONAL BUTTONS === */
+.stButton > button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.stButton > button:hover {
+    background-color: #1d4ed8;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.stButton > button:active {
+    transform: translateY(1px);
+}
+
+/* Success button variant */
+.stButton button[kind="primary"] {
+    background-color: var(--success-color);
+}
+
+.stButton button[kind="primary"]:hover {
+    background-color: #047857;
+}
+
+/* === CLEAN FORM INPUTS === */
+.stTextInput > div > input,
+.stTextArea > div > textarea,
+.stSelectbox > div > div {
+    background-color: var(--background-light);
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+    color: var(--text-light);
+}
+
+.stTextInput > div > input:focus,
+.stTextArea > div > textarea:focus,
+.stSelectbox > div > div:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
+
+/* Dark mode form inputs */
+@media (prefers-color-scheme: dark) {
+    .stTextInput > div > input,
+    .stTextArea > div > textarea,
+    .stSelectbox > div > div {
+        background-color: #374151;
+        border-color: #4b5563;
+        color: var(--text-dark);
+    }
+}
+
+/* === SIMPLE CARDS AND CONTAINERS === */
+.css-1d391kg,
+.stContainer > div {
+    background-color: var(--background-light);
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+}
+
+/* Dark mode containers */
+@media (prefers-color-scheme: dark) {
+    .css-1d391kg,
+    .stContainer > div {
+        background-color: #1f2937;
+        border-color: #374151;
+    }
+}
+
+/* === CLEAN SIDEBAR === */
+.stSidebar > div {
+    background-color: #f8fafc;
+    border-right: 1px solid #e5e7eb;
+}
+
+.stSidebar .stMarkdown {
+    color: var(--text-light);
+}
+
+.stSidebar .stButton > button {
+    background-color: var(--secondary-color);
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+.stSidebar .stButton > button:hover {
+    background-color: #475569;
+}
+
+/* Dark mode sidebar */
+@media (prefers-color-scheme: dark) {
+    .stSidebar > div {
+        background-color: #1e293b;
+        border-color: #374151;
+    }
+    
+    .stSidebar .stMarkdown {
+        color: var(--text-dark);
+    }
+}
+
+/* === CLEAN STATUS MESSAGES === */
+.stSuccess {
+    background-color: #d1fae5;
+    color: #065f46;
+    border: 1px solid #10b981;
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.stError {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #ef4444;
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.stWarning {
+    background-color: #fef3c7;
+    color: #92400e;
+    border: 1px solid #f59e0b;
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.stInfo {
+    background-color: #dbeafe;
+    color: #1e40af;
+    border: 1px solid #3b82f6;
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+/* Dark mode status messages */
+@media (prefers-color-scheme: dark) {
+    .stSuccess {
+        background-color: #064e3b;
+        color: #a7f3d0;
+        border-color: #059669;
+    }
+    
+    .stError {
+        background-color: #7f1d1d;
+        color: #fca5a5;
+        border-color: #dc2626;
+    }
+    
+    .stWarning {
+        background-color: #78350f;
+        color: #fcd34d;
+        border-color: #d97706;
+    }
+    
+    .stInfo {
+        background-color: #1e3a8a;
+        color: #93c5fd;
+        border-color: #2563eb;
+    }
+}
+
+/* === SIMPLE EXPANDER === */
+.streamlit-expanderHeader {
+    background-color: #f3f4f6;
+    color: var(--text-light);
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-weight: 500;
+}
+
+/* Dark mode expander */
+@media (prefers-color-scheme: dark) {
+    .streamlit-expanderHeader {
+        background-color: #374151;
+        color: var(--text-dark);
+        border-color: #4b5563;
+    }
+}
+
+/* === CLEAN CHAT INTERFACE === */
+.chat-message {
+    background-color: var(--background-light);
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.chat-user {
+    background-color: #eff6ff;
+    border-color: #3b82f6;
+    margin-left: 2rem;
+}
+
+.chat-assistant {
+    background-color: #f0fdf4;
+    border-color: #22c55e;
+    margin-right: 2rem;
+}
+
+/* Dark mode chat */
+@media (prefers-color-scheme: dark) {
+    .chat-message {
+        background-color: #1f2937;
+        border-color: #374151;
+    }
+    
+    .chat-user {
+        background-color: #1e3a8a;
+        border-color: #2563eb;
+    }
+    
+    .chat-assistant {
+        background-color: #064e3b;
+        border-color: #059669;
+    }
+}
+
+/* === CARBON FOOTPRINT OPTIMIZATIONS === */
+/* Reduce animations on low-power devices */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* === ACCESSIBILITY IMPROVEMENTS === */
+@media (prefers-contrast: high) {
+    .stButton > button {
+        border: 2px solid #000;
+    }
+    
+    .stTextInput > div > input {
+        border: 2px solid #000;
+    }
+}
+
+/* === LOADING STATES === */
+.stSpinner {
+    border-color: var(--primary-color) transparent var(--primary-color) transparent;
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 768px) {
+    .stContainer > div {
+        padding: 1rem;
+        margin: 0.5rem;
+    }
+    
+    .stButton > button {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* === ECO-BADGE (Simple and professional) === */
+.eco-badge {
+    background-color: var(--success-color);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    display: inline-block;
+    margin: 0.25rem;
+}
+
+/* === METRIC CARDS (Simplified) === */
+.metric-card {
+    background-color: var(--background-light);
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.2s ease;
+}
+
+.metric-card:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode metric cards */
+@media (prefers-color-scheme: dark) {
+    .metric-card {
+        background-color: #1f2937;
+        border-color: #374151;
+    }
+}
+
+.status-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+
+.status-online {
+    background-color: var(--success-color);
+}
+
+.status-offline {
+    background-color: var(--error-color);
+}
+
+/* === SUBTLE ANIMATIONS === */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.stMarkdown, .stButton, .stTextInput {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* === PRINT STYLES (Eco-friendly printing) === */
+@media print {
+    * {
+        background: white !important;
+        color: black !important;
+        box-shadow: none !important;
+    }
+    
+    .stSidebar {
+        display: none !important;
+    }
+}
