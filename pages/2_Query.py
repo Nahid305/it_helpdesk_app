@@ -351,40 +351,81 @@ else:
         user_lang = st.session_state.get('user_language', 'en')
         placeholder_text = language_support.get_text('ask_question', user_lang)
         
-        # Add JavaScript for Ctrl+Enter functionality
+        # Add JavaScript for Enter/Ctrl+Enter functionality
         st.markdown("""
         <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            function addEnterKeyHandler() {
-                const textareas = document.querySelectorAll('textarea');
-                textareas.forEach(function(textarea) {
-                    if (!textarea.hasEnterHandler) {
-                        textarea.hasEnterHandler = true;
-                        textarea.addEventListener('keydown', function(e) {
-                            if (e.key === 'Enter') {
-                                if (e.ctrlKey) {
-                                    // Ctrl+Enter: Allow new line (default behavior)
-                                    return true;
-                                } else {
-                                    // Enter alone: Send message
-                                    e.preventDefault();
-                                    const form = textarea.closest('form');
-                                    if (form) {
-                                        const submitBtn = form.querySelector('button[type="submit"]');
-                                        if (submitBtn) {
-                                            submitBtn.click();
-                                        }
-                                    }
+        function setupKeyboardHandlers() {
+            // Remove any existing handlers first
+            document.querySelectorAll('textarea').forEach(textarea => {
+                if (textarea.clonedNode) {
+                    textarea.parentNode.replaceChild(textarea.clonedNode, textarea);
+                }
+            });
+            
+            // Add new handlers
+            const textareas = document.querySelectorAll('textarea');
+            textareas.forEach(function(textarea) {
+                // Clone the textarea to remove all existing event listeners
+                const newTextarea = textarea.cloneNode(true);
+                newTextarea.value = textarea.value;
+                textarea.clonedNode = newTextarea;
+                
+                newTextarea.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        if (e.ctrlKey || e.shiftKey) {
+                            // Ctrl+Enter or Shift+Enter: Allow new line
+                            // Do nothing, let default behavior happen
+                        } else {
+                            // Enter alone: Prevent default and submit form
+                            e.preventDefault();
+                            e.stopPropagation();
+                            
+                            // Find the form and submit button
+                            const form = newTextarea.closest('form');
+                            if (form) {
+                                const submitBtn = form.querySelector('button[type="submit"]');
+                                if (submitBtn) {
+                                    // Trigger form submission
+                                    submitBtn.click();
                                 }
                             }
-                        });
+                        }
                     }
                 });
+                
+                // Replace the original textarea
+                if (textarea.parentNode) {
+                    textarea.parentNode.replaceChild(newTextarea, textarea);
+                }
+            });
+        }
+        
+        // Setup handlers immediately
+        setupKeyboardHandlers();
+        
+        // Re-setup periodically to catch new textareas
+        setInterval(setupKeyboardHandlers, 1000);
+        
+        // Also setup when page content changes
+        const observer = new MutationObserver(function(mutations) {
+            let shouldSetup = false;
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'childList') {
+                    mutation.addedNodes.forEach(function(node) {
+                        if (node.nodeType === 1 && (node.tagName === 'TEXTAREA' || node.querySelector('textarea'))) {
+                            shouldSetup = true;
+                        }
+                    });
+                }
+            });
+            if (shouldSetup) {
+                setTimeout(setupKeyboardHandlers, 100);
             }
-            
-            // Run immediately and set interval to catch dynamically created textareas
-            addEnterKeyHandler();
-            setInterval(addEnterKeyHandler, 500);
+        });
+        
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
         });
         </script>
         """, unsafe_allow_html=True)
