@@ -361,14 +361,19 @@ else:
                     if (!textarea.hasEnterHandler) {
                         textarea.hasEnterHandler = true;
                         textarea.addEventListener('keydown', function(e) {
-                            if (e.key === 'Enter' && !e.ctrlKey && !e.shiftKey) {
-                                e.preventDefault();
-                                // Find and click the submit button
-                                const form = textarea.closest('form');
-                                if (form) {
-                                    const submitBtn = form.querySelector('button[type="submit"]');
-                                    if (submitBtn) {
-                                        submitBtn.click();
+                            if (e.key === 'Enter') {
+                                if (e.ctrlKey) {
+                                    // Ctrl+Enter: Allow new line (default behavior)
+                                    return true;
+                                } else {
+                                    // Enter alone: Send message
+                                    e.preventDefault();
+                                    const form = textarea.closest('form');
+                                    if (form) {
+                                        const submitBtn = form.querySelector('button[type="submit"]');
+                                        if (submitBtn) {
+                                            submitBtn.click();
+                                        }
                                     }
                                 }
                             }
