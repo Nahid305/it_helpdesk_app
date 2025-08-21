@@ -351,100 +351,57 @@ else:
         user_lang = st.session_state.get('user_language', 'en')
         placeholder_text = language_support.get_text('ask_question', user_lang)
         
-        # Add JavaScript for Enter/Ctrl+Enter functionality
-        st.markdown("""
+        # Simple approach: Use text_area without form and handle with button + key detection
+        col1, col2 = st.columns([5, 1])
+        with col1:
+            user_input = st.text_area(
+                "Type your message here...", 
+                placeholder=f"{placeholder_text}\n\nTip: Press Enter to send, Ctrl+Enter for new line",
+                key=f"chat_input_{st.session_state.input_key}",
+                label_visibility="collapsed",
+                height=60
+            )
+        with col2:
+            # Small professional send button - align to bottom
+            st.markdown("<div style='margin-top: 28px;'></div>", unsafe_allow_html=True)
+            send_btn = st.button("Send", type="primary", key="send_message_btn")
+        
+        # Add JavaScript for Enter key detection on text area
+        st.markdown(f"""
         <script>
-        function setupKeyboardHandlers() {
-            // Remove any existing handlers first
-            document.querySelectorAll('textarea').forEach(textarea => {
-                if (textarea.clonedNode) {
-                    textarea.parentNode.replaceChild(textarea.clonedNode, textarea);
-                }
-            });
-            
-            // Add new handlers
-            const textareas = document.querySelectorAll('textarea');
-            textareas.forEach(function(textarea) {
-                // Clone the textarea to remove all existing event listeners
-                const newTextarea = textarea.cloneNode(true);
-                newTextarea.value = textarea.value;
-                textarea.clonedNode = newTextarea;
+        // Function to handle Enter key in textarea
+        function handleTextareaKeys() {{
+            const textarea = document.querySelector('textarea[aria-label="Type your message here..."]');
+            if (textarea && !textarea.hasCustomHandler) {{
+                textarea.hasCustomHandler = true;
                 
-                newTextarea.addEventListener('keydown', function(e) {
-                    if (e.key === 'Enter') {
-                        if (e.ctrlKey || e.shiftKey) {
-                            // Ctrl+Enter or Shift+Enter: Allow new line
-                            // Do nothing, let default behavior happen
-                        } else {
-                            // Enter alone: Prevent default and submit form
-                            e.preventDefault();
-                            e.stopPropagation();
-                            
-                            // Find the form and submit button
-                            const form = newTextarea.closest('form');
-                            if (form) {
-                                const submitBtn = form.querySelector('button[type="submit"]');
-                                if (submitBtn) {
-                                    // Trigger form submission
-                                    submitBtn.click();
-                                }
-                            }
-                        }
-                    }
-                });
-                
-                // Replace the original textarea
-                if (textarea.parentNode) {
-                    textarea.parentNode.replaceChild(newTextarea, textarea);
-                }
-            });
-        }
+                textarea.addEventListener('keydown', function(e) {{
+                    if (e.key === 'Enter' && !e.ctrlKey && !e.shiftKey) {{
+                        e.preventDefault();
+                        
+                        // Get the current value
+                        const message = textarea.value.trim();
+                        if (message) {{
+                            // Find and click the send button
+                            const sendButton = document.querySelector('button[kind="primary"]');
+                            if (sendButton) {{
+                                sendButton.click();
+                            }}
+                        }}
+                    }}
+                }});
+            }}
+        }}
         
-        // Setup handlers immediately
-        setupKeyboardHandlers();
+        // Run immediately and set interval
+        handleTextareaKeys();
+        setInterval(handleTextareaKeys, 500);
         
-        // Re-setup periodically to catch new textareas
-        setInterval(setupKeyboardHandlers, 1000);
-        
-        // Also setup when page content changes
-        const observer = new MutationObserver(function(mutations) {
-            let shouldSetup = false;
-            mutations.forEach(function(mutation) {
-                if (mutation.type === 'childList') {
-                    mutation.addedNodes.forEach(function(node) {
-                        if (node.nodeType === 1 && (node.tagName === 'TEXTAREA' || node.querySelector('textarea'))) {
-                            shouldSetup = true;
-                        }
-                    });
-                }
-            });
-            if (shouldSetup) {
-                setTimeout(setupKeyboardHandlers, 100);
-            }
-        });
-        
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true
-        });
+        // Watch for DOM changes
+        const observer = new MutationObserver(handleTextareaKeys);
+        observer.observe(document.body, {{ childList: true, subtree: true }});
         </script>
         """, unsafe_allow_html=True)
-        
-        # Use form for Enter key functionality and proper button placement
-        with st.form("chat_form", clear_on_submit=True):
-            col1, col2 = st.columns([5, 1])
-            with col1:
-                user_input = st.text_area(
-                    "Type your message here...", 
-                    placeholder=f"{placeholder_text}\n\nTip: Press Enter to send, Ctrl+Enter for new line",
-                    key=f"chat_input_{st.session_state.input_key}",
-                    label_visibility="collapsed",
-                    height=60
-                )
-            with col2:
-                # Small professional send button - align to bottom
-                st.markdown("<div style='margin-top: 28px;'></div>", unsafe_allow_html=True)
-                send_btn = st.form_submit_button("Send", type="primary")
         
         # End chat and Clear chat buttons (after the chat input form)
         st.markdown("---")
