@@ -89,6 +89,58 @@ section[data-testid="stSidebar"] {
 .st-emotion-cache-1cypcdb, .st-emotion-cache-1v0mbdj {
     display: none !important;
 }
+
+/* Professional Send Button Styling */
+button[kind="primary"] {
+    background-color: white !important;
+    color: #333 !important;
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    padding: 0.25rem 0.75rem !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    min-height: 32px !important;
+    height: 32px !important;
+    width: auto !important;
+    max-width: 80px !important;
+    margin: 0 !important;
+}
+
+button[kind="primary"]:hover {
+    background-color: #f8f9fa !important;
+    border-color: #ccc !important;
+    color: #222 !important;
+}
+
+button[kind="primary"]:focus {
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.1) !important;
+    outline: none !important;
+}
+
+/* Remove red background from any buttons */
+.stButton > button, button {
+    background-color: white !important;
+}
+
+/* Specific targeting for form submit button */
+div[data-testid="stForm"] button[type="submit"] {
+    background-color: white !important;
+    color: #333 !important;
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    padding: 0.25rem 0.75rem !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    min-height: 32px !important;
+    height: 32px !important;
+    width: auto !important;
+    max-width: 80px !important;
+}
+
+div[data-testid="stForm"] button[type="submit"]:hover {
+    background-color: #f8f9fa !important;
+    border-color: #ccc !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -282,15 +334,17 @@ else:
         
         # Use form for Enter key functionality and proper button placement
         with st.form("chat_form", clear_on_submit=True):
-            user_input = st.text_input(
-                "Type your message here...", 
-                placeholder=placeholder_text,
-                key=f"chat_input_{st.session_state.input_key}",
-                label_visibility="collapsed"
-            )
-            
-            # Submit button (hidden, form submits on Enter)
-            send_btn = st.form_submit_button("Send", type="primary", use_container_width=True)
+            col1, col2 = st.columns([5, 1])
+            with col1:
+                user_input = st.text_input(
+                    "Type your message here...", 
+                    placeholder=placeholder_text,
+                    key=f"chat_input_{st.session_state.input_key}",
+                    label_visibility="collapsed"
+                )
+            with col2:
+                # Small professional send button
+                send_btn = st.form_submit_button("Send", type="primary")
         
         # End chat and Clear chat buttons (after the chat input form)
         st.markdown("---")
