@@ -141,6 +141,25 @@ div[data-testid="stForm"] button[type="submit"]:hover {
     background-color: #f8f9fa !important;
     border-color: #ccc !important;
 }
+
+/* Text area styling for better appearance */
+textarea {
+    resize: vertical !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    font-size: 0.9rem !important;
+    line-height: 1.4 !important;
+}
+
+/* Chat input container styling */
+div[data-testid="stForm"] textarea {
+    border-radius: 4px !important;
+    border: 1px solid #ddd !important;
+}
+
+div[data-testid="stForm"] textarea:focus {
+    border-color: #999 !important;
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.1) !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -332,18 +351,53 @@ else:
         user_lang = st.session_state.get('user_language', 'en')
         placeholder_text = language_support.get_text('ask_question', user_lang)
         
+        # Add JavaScript for Ctrl+Enter functionality
+        st.markdown("""
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function addEnterKeyHandler() {
+                const textareas = document.querySelectorAll('textarea');
+                textareas.forEach(function(textarea) {
+                    if (!textarea.hasEnterHandler) {
+                        textarea.hasEnterHandler = true;
+                        textarea.addEventListener('keydown', function(e) {
+                            if (e.key === 'Enter' && !e.ctrlKey && !e.shiftKey) {
+                                e.preventDefault();
+                                // Find and click the submit button
+                                const form = textarea.closest('form');
+                                if (form) {
+                                    const submitBtn = form.querySelector('button[type="submit"]');
+                                    if (submitBtn) {
+                                        submitBtn.click();
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+            
+            // Run immediately and set interval to catch dynamically created textareas
+            addEnterKeyHandler();
+            setInterval(addEnterKeyHandler, 500);
+        });
+        </script>
+        """, unsafe_allow_html=True)
+        
         # Use form for Enter key functionality and proper button placement
         with st.form("chat_form", clear_on_submit=True):
             col1, col2 = st.columns([5, 1])
             with col1:
-                user_input = st.text_input(
+                user_input = st.text_area(
                     "Type your message here...", 
-                    placeholder=placeholder_text,
+                    placeholder=f"{placeholder_text}\n\nTip: Press Enter to send, Ctrl+Enter for new line",
                     key=f"chat_input_{st.session_state.input_key}",
-                    label_visibility="collapsed"
+                    label_visibility="collapsed",
+                    height=60
                 )
             with col2:
-                # Small professional send button
+                # Small professional send button - align to bottom
+                st.markdown("<div style='margin-top: 28px;'></div>", unsafe_allow_html=True)
                 send_btn = st.form_submit_button("Send", type="primary")
         
         # End chat and Clear chat buttons (after the chat input form)
