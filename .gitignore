@@ -56,3 +56,24 @@ Thumbs.db
 
 # Uploaded files
 uploads/
+
+# Test files (if any are accidentally added)
+test_*.py
+*_test.py
+debug_*.py
+comprehensive_test.py
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Docker (not needed for Streamlit Cloud)
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Build files
+build.bat
+build.sh

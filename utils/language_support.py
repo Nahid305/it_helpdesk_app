@@ -133,6 +133,33 @@ class LanguageSupport:
                 'network_issues': "Netzwerkprobleme",
                 'software_help': "Software-Hilfe"
             },
+            'it': {
+                'welcome': "Ciao! Sono il tuo assistente IT helpdesk alimentato dall'IA. Come posso aiutarti oggi?",
+                'ask_question': "Fai la tua domanda IT:",
+                'send': "Invia",
+                'helpful': "Utile",
+                'not_helpful': "Non Utile",
+                'create_ticket': "Crea Ticket",
+                'new_chat': "Nuova Chat",
+                'end_chat': "Termina Chat",
+                'clear_chat': "Cancella Chat",
+                'thank_you': "Grazie per aver utilizzato il nostro supporto IT! 😊",
+                'new_session': "Avvio di una nuova sessione di chat per te...",
+                'ticket_question': "Vorresti creare un ticket perché un umano ti assista?",
+                'no_thanks': "No, grazie",
+                'start_new_chat': "Inizia Nuova Chat",
+                'login_required': "Devi effettuare il login per utilizzare l'assistente chat.",
+                'basic_mode': "⚡ **Modalità Base**: Servizio IA non disponibile, utilizzo risposte basate su regole. Controlla la configurazione API nel file .env.",
+                'enter_message': "Per favore inserisci un messaggio prima di inviare.",
+                'starting_new_chat': "Avvio di una nuova sessione di chat per te...",
+                'language_select': "Seleziona Lingua:",
+                'password_reset': "Reset Password",
+                'vpn_issues': "Problemi VPN",
+                'email_problems': "Problemi Email",
+                'printer_setup': "Configurazione Stampante",
+                'network_issues': "Problemi di Rete",
+                'software_help': "Aiuto Software"
+            },
             'zh': {
                 'welcome': "您好！我是您的AI驱动的IT帮助台助手。今天我可以为您做些什么？",
                 'ask_question': "请提出您的IT问题：",
@@ -172,9 +199,10 @@ class LanguageSupport:
         
         # Simple keyword-based detection with scoring
         language_indicators = {
-            'it': ['ciao', 'grazie', 'per favore', 'aiuto', 'problema', 'password', 'italiano', 'ho', 'bisogno', 'può', 'salve', 'buongiorno'],
-            'es': ['hola', 'gracias', 'por favor', 'ayuda', 'problema', 'contraseña', 'español', 'tengo', 'necesito', 'puede', 'buenos días'],
-            'fr': ['bonjour', 'merci', 's\'il vous plaît', 'aide', 'problème', 'mot de passe', 'français', 'j\'ai', 'besoin', 'pouvez', 'salut'],
+            'en': ['how', 'to', 'reset', 'password', 'help', 'need', 'can', 'please', 'my', 'the', 'is', 'have', 'get', 'make', 'want', 'install', 'setup', 'problem', 'issue', 'error', 'cannot', 'unable', 'trying', 'work', 'don\'t', 'doesn\'t', 'won\'t', 'can\'t', 'shouldn\'t', 'wouldn\'t', 'understand', 'these', 'steps', 'more', 'some', 'any', 'all', 'every', 'each', 'this', 'that', 'those', 'what', 'when', 'where', 'why', 'who', 'which', 'how', 'do', 'does', 'did', 'will', 'would', 'should', 'could', 'might', 'must', 'shall', 'may', 'am', 'are', 'was', 'were', 'been', 'being', 'has', 'had', 'having', 'go', 'goes', 'went', 'going', 'come', 'comes', 'came', 'coming', 'see', 'sees', 'saw', 'seeing', 'know', 'knows', 'knew', 'knowing', 'think', 'thinks', 'thought', 'thinking', 'say', 'says', 'said', 'saying', 'tell', 'tells', 'told', 'telling', 'ask', 'asks', 'asked', 'asking', 'give', 'gives', 'gave', 'giving', 'take', 'takes', 'took', 'taking', 'find', 'finds', 'found', 'finding', 'use', 'uses', 'used', 'using', 'try', 'tries', 'tried', 'trying', 'work', 'works', 'worked', 'working'],
+            'it': ['ciao', 'grazie', 'per favore', 'aiuto', 'problema', 'password', 'italiano', 'ho', 'bisogno', 'può', 'salve', 'buongiorno', 'voglio', 'installare', 'come', 'fare', 'dove', 'che', 'cosa', 'una', 'sono', 'questo', 'non', 'riesco', 'capire', 'questi', 'passaggi', 'devo', 'posso', 'mi', 'la', 'le', 'di', 'da', 'con', 'per', 'su', 'in', 'il', 'lo', 'gli', 'del', 'della', 'delle', 'dei', 'mio', 'mia', 'suoi', 'sua', 'loro', 'funziona', 'funzionare', 'errore', 'sbagliato', 'sbagliata', 'quando', 'ora', 'adesso', 'sempre', 'mai', 'oggi', 'ieri', 'domani', 'primo', 'prima', 'dopo', 'durante', 'mentre', 'perché', 'quindi', 'allora', 'però', 'però', 'anche', 'ancora', 'già', 'qui', 'qua', 'lì', 'là'],
+            'es': ['hola', 'gracias', 'por favor', 'ayuda', 'problema', 'contraseña', 'español', 'tengo', 'necesito', 'puede', 'buenos días', 'quiero', 'instalar', 'vpn', 'un', 'como', 'hacer', 'donde', 'soy', 'esto', 'restablecer', 'olvidé', 'olvidado', 'password', 'iniciar', 'no', 'puedo', 'entender', 'estos', 'pasos', 'debo', 'mi', 'mis', 'tu', 'sus', 'el', 'la', 'los', 'las', 'del', 'de', 'con', 'por', 'para', 'en', 'es', 'está', 'son', 'han', 'he', 'has', 'hemos', 'cuando', 'que', 'qué', 'por qué', 'porque', 'entonces', 'pero', 'también', 'siempre', 'nunca', 'ahora', 'hoy', 'ayer', 'mañana', 'aquí', 'allí', 'muy', 'más', 'menos', 'bien', 'mal', 'funciona', 'error', 'problema', 'tiempo', 'vez', 'veces'],
+            'fr': ['bonjour', 'merci', 's\'il vous plaît', 'aide', 'problème', 'mot de passe', 'français', 'j\'ai', 'besoin', 'pouvez', 'salut', 'je', 'ne', 'pas', 'ces', 'étapes', 'comprends', 'comprendre', 'vous', 'nous', 'ils', 'elles', 'le', 'la', 'les', 'du', 'des', 'un', 'une', 'avec', 'dans', 'sur', 'pour', 'par', 'et', 'ou', 'mais', 'donc', 'si', 'quand', 'comment', 'où', 'pourquoi', 'que', 'qui', 'dont', 'très', 'plus', 'moins', 'bien', 'mal', 'toujours', 'jamais', 'maintenant', 'aujourd\'hui', 'hier', 'demain', 'ici', 'là'],
             'de': ['hallo', 'danke', 'bitte', 'hilfe', 'problem', 'passwort', 'deutsch', 'ich habe', 'brauche', 'können', 'guten tag'],
             'pt': ['olá', 'obrigado', 'por favor', 'ajuda', 'problema', 'senha', 'português', 'tenho', 'preciso', 'pode', 'bom dia'],
             'nl': ['hallo', 'dank je', 'alsjeblieft', 'hulp', 'probleem', 'wachtwoord', 'nederlands', 'ik heb', 'nodig', 'kunt', 'goedemorgen'],
@@ -186,10 +214,20 @@ class LanguageSupport:
             'hi': ['नमस्ते', 'धन्यवाद', 'कृपया', 'मदद', 'समस्या', 'पासवर्ड', 'हिंदी', 'मेरे पास', 'चाहिए', 'कर सकते']
         }
         
-        # Score each language based on keyword matches
+        # Score each language based on keyword matches (using word boundaries)
+        import re
+        text_words = text_lower.split()
         language_scores = {}
         for lang, keywords in language_indicators.items():
-            score = sum(1 for keyword in keywords if keyword in text_lower)
+            score = 0
+            for keyword in keywords:
+                # Use word boundary matching to avoid partial matches
+                if ' ' in keyword:  # Multi-word phrases
+                    if keyword in text_lower:
+                        score += 1
+                else:  # Single words - check if they appear as complete words
+                    if keyword in text_words:
+                        score += 1
             if score > 0:
                 language_scores[lang] = score
         
@@ -241,7 +279,18 @@ class LanguageSupport:
                 'Go to': 'Ve a', 'Enter': 'Ingresa', 'Check': 'Verifica',
                 'That should get you back': 'Eso debería devolverle el acceso',
                 'If you don\'t receive': 'Si no recibes', 'minutes': 'minutos',
-                'check your spam folder': 'revisa tu carpeta de spam'
+                'check your spam folder': 'revisa tu carpeta de spam',
+                'I\'ll help you get the VPN client working smoothly': 'Te ayudaré a hacer funcionar el cliente VPN sin problemas',
+                'Open your company software center': 'Abre el centro de software de tu empresa',
+                'or download portal': 'o portal de descargas',
+                'Search for': 'Busca', 'Install': 'Instalar', 'and wait for download completion': 'y espera a que se complete la descarga',
+                'Run installer with administrator privileges': 'Ejecuta el instalador con privilegios de administrador',
+                'right-click': 'clic derecho', 'Run as administrator': 'Ejecutar como administrador',
+                'Launch the VPN app': 'Inicia la aplicación VPN', 'from your desktop or start menu': 'desde tu escritorio o menú de inicio',
+                'Enter server address': 'Ingresa la dirección del servidor', 'Log in with your company credentials': 'Inicia sesión con las credenciales de tu empresa',
+                'Connect': 'Conectar', 'and check for green connection status': 'y verifica el estado de conexión verde',
+                'You should now be securely connected': 'Ahora deberías estar conectado de forma segura',
+                'The connection icon will appear in your system tray': 'El icono de conexión aparecerá en tu bandeja del sistema'
             },
             'fr': {
                 'Hi': 'Salut', 'Hello': 'Bonjour', 'Step': 'Étape', 'Click': 'Cliquez',
@@ -249,6 +298,22 @@ class LanguageSupport:
                 'That should get you back': 'Cela devrait vous reconnecter',
                 'If you don\'t receive': 'Si vous ne recevez pas', 'minutes': 'minutes',
                 'check your spam folder': 'vérifiez votre dossier spam'
+            },
+            'it': {
+                'Hi': 'Ciao', 'Hello': 'Ciao', 'Step': 'Passo', 'Click': 'Clicca',
+                'Go to': 'Vai a', 'Enter': 'Inserisci', 'Check': 'Controlla',
+                'That should get you back': 'Questo dovrebbe ripristinare il tuo accesso',
+                'If you don\'t receive': 'Se non ricevi', 'minutes': 'minuti',
+                'check your spam folder': 'controlla la cartella spam',
+                'I\'ll help you get the VPN client working smoothly': 'Ti aiuterò a far funzionare il client VPN senza problemi',
+                'Open your company software center': 'Apri il centro software della tua azienda',
+                'Search for': 'Cerca', 'Install': 'Installa', 'wait for download completion': 'aspetta il completamento del download',
+                'Run installer with administrator privileges': 'Esegui l\'installer con privilegi di amministratore',
+                'Launch the VPN app': 'Avvia l\'app VPN', 'from your desktop or start menu': 'dal desktop o dal menu start',
+                'Enter server address': 'Inserisci l\'indirizzo del server', 'Log in with your company credentials': 'Accedi con le credenziali della tua azienda',
+                'Connect': 'Connetti', 'check for green connection status': 'verifica lo stato di connessione verde',
+                'You should now be securely connected': 'Ora dovresti essere connesso in modo sicuro',
+                'The connection icon will appear in your system tray': 'L\'icona di connessione apparirà nella barra delle applicazioni'
             }
             # Add more languages as needed
         }
