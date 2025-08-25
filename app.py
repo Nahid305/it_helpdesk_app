@@ -1,6 +1,6 @@
 import streamlit as st
 
-# Configure page with minimal visibility
+# Configure page with minimal visibility - Fixed Spanish language support v2.0
 st.set_page_config(
     page_title="IT Helpdesk",
     page_icon="🔧",

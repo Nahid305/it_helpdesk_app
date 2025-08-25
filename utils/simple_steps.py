@@ -25,6 +25,10 @@ def load_steps():
 def match_query(query, user_context=None, chat_history=None):
     """Enhanced query matching with AI and NLP fallback."""
     
+    # Debug: Check what language was detected
+    user_language = user_context.get('language', 'en') if user_context else 'en'
+    print(f"DEBUG: Query='{query}', Language='{user_language}', Context={user_context}")
+    
     # Try Grok AI first if available
     if is_grok_available():
         try:
@@ -46,12 +50,14 @@ def match_query(query, user_context=None, chat_history=None):
                 
                 # Get AI response
                 response = service.chat_completion(formatted_history, user_context)
+                print(f"DEBUG: Got AI response for language {user_language}")
                 return response
         except Exception as e:
             # Fall back to basic NLP if AI fails
             print(f"AI service error: {e}")
     
     # Fallback to basic NLP matching
+    print(f"DEBUG: Using basic NLP fallback for language {user_language}")
     return _basic_nlp_match(query, user_context)
 
 def _basic_nlp_match(query, user_context=None):
