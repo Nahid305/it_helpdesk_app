@@ -201,7 +201,7 @@ class LanguageSupport:
         language_indicators = {
             'en': ['how', 'to', 'reset', 'password', 'help', 'need', 'can', 'please', 'my', 'the', 'is', 'have', 'get', 'make', 'want', 'install', 'setup', 'problem', 'issue', 'error', 'cannot', 'unable', 'trying', 'work', 'don\'t', 'doesn\'t', 'won\'t', 'can\'t', 'shouldn\'t', 'wouldn\'t', 'understand', 'these', 'steps', 'more', 'some', 'any', 'all', 'every', 'each', 'this', 'that', 'those', 'what', 'when', 'where', 'why', 'who', 'which', 'how', 'do', 'does', 'did', 'will', 'would', 'should', 'could', 'might', 'must', 'shall', 'may', 'am', 'are', 'was', 'were', 'been', 'being', 'has', 'had', 'having', 'go', 'goes', 'went', 'going', 'come', 'comes', 'came', 'coming', 'see', 'sees', 'saw', 'seeing', 'know', 'knows', 'knew', 'knowing', 'think', 'thinks', 'thought', 'thinking', 'say', 'says', 'said', 'saying', 'tell', 'tells', 'told', 'telling', 'ask', 'asks', 'asked', 'asking', 'give', 'gives', 'gave', 'giving', 'take', 'takes', 'took', 'taking', 'find', 'finds', 'found', 'finding', 'use', 'uses', 'used', 'using', 'try', 'tries', 'tried', 'trying', 'work', 'works', 'worked', 'working'],
             'it': ['ciao', 'grazie', 'per favore', 'aiuto', 'problema', 'password', 'italiano', 'ho', 'bisogno', 'può', 'salve', 'buongiorno', 'voglio', 'installare', 'come', 'fare', 'dove', 'che', 'cosa', 'una', 'sono', 'questo', 'non', 'riesco', 'capire', 'questi', 'passaggi', 'devo', 'posso', 'mi', 'la', 'le', 'di', 'da', 'con', 'per', 'su', 'in', 'il', 'lo', 'gli', 'del', 'della', 'delle', 'dei', 'mio', 'mia', 'suoi', 'sua', 'loro', 'funziona', 'funzionare', 'errore', 'sbagliato', 'sbagliata', 'quando', 'ora', 'adesso', 'sempre', 'mai', 'oggi', 'ieri', 'domani', 'primo', 'prima', 'dopo', 'durante', 'mentre', 'perché', 'quindi', 'allora', 'però', 'però', 'anche', 'ancora', 'già', 'qui', 'qua', 'lì', 'là'],
-            'es': ['hola', 'gracias', 'por favor', 'ayuda', 'problema', 'contraseña', 'español', 'tengo', 'necesito', 'puede', 'buenos días', 'quiero', 'instalar', 'vpn', 'un', 'como', 'hacer', 'donde', 'soy', 'esto', 'restablecer', 'olvidé', 'olvidado', 'password', 'iniciar', 'no', 'puedo', 'entender', 'estos', 'pasos', 'debo', 'mi', 'mis', 'tu', 'sus', 'el', 'la', 'los', 'las', 'del', 'de', 'con', 'por', 'para', 'en', 'es', 'está', 'son', 'han', 'he', 'has', 'hemos', 'cuando', 'que', 'qué', 'por qué', 'porque', 'entonces', 'pero', 'también', 'siempre', 'nunca', 'ahora', 'hoy', 'ayer', 'mañana', 'aquí', 'allí', 'muy', 'más', 'menos', 'bien', 'mal', 'funciona', 'error', 'problema', 'tiempo', 'vez', 'veces'],
+            'es': ['hola', 'gracias', 'por favor', 'ayuda', 'problema', 'contraseña', 'español', 'tengo', 'necesito', 'puede', 'buenos días', 'quiero', 'instalar', 'vpn', 'un', 'como', 'hacer', 'donde', 'soy', 'esto', 'restablecer', 'olvidé', 'olvidado', 'password', 'iniciar', 'no', 'puedo', 'entender', 'estos', 'pasos', 'debo', 'mi', 'mis', 'tu', 'sus', 'el', 'la', 'los', 'las', 'del', 'de', 'con', 'por', 'para', 'en', 'es', 'está', 'son', 'han', 'he', 'has', 'hemos', 'cuando', 'que', 'qué', 'por qué', 'porque', 'entonces', 'pero', 'también', 'siempre', 'nunca', 'ahora', 'hoy', 'ayer', 'mañana', 'aquí', 'allí', 'muy', 'más', 'menos', 'bien', 'mal', 'funciona', 'error', 'problema', 'tiempo', 'vez', 'veces', 'buenas', 'tardes', 'noches', 'sí', 'claro', 'correo', 'email', 'conectar', 'conexión', 'servidor', 'configurar', 'instalación', 'usuario', 'cuenta', 'acceso', 'seguridad', 'red', 'internet', 'wifi', 'impresora', 'imprimir', 'software', 'programa', 'aplicación', 'ventana', 'pantalla', 'teclado', 'ratón', 'mouse', 'ordenador', 'computadora', 'equipo', 'dispositivo', 'móvil', 'celular', 'teléfono', 'tablet'],
             'fr': ['bonjour', 'merci', 's\'il vous plaît', 'aide', 'problème', 'mot de passe', 'français', 'j\'ai', 'besoin', 'pouvez', 'salut', 'je', 'ne', 'pas', 'ces', 'étapes', 'comprends', 'comprendre', 'vous', 'nous', 'ils', 'elles', 'le', 'la', 'les', 'du', 'des', 'un', 'une', 'avec', 'dans', 'sur', 'pour', 'par', 'et', 'ou', 'mais', 'donc', 'si', 'quand', 'comment', 'où', 'pourquoi', 'que', 'qui', 'dont', 'très', 'plus', 'moins', 'bien', 'mal', 'toujours', 'jamais', 'maintenant', 'aujourd\'hui', 'hier', 'demain', 'ici', 'là'],
             'de': ['hallo', 'danke', 'bitte', 'hilfe', 'problem', 'passwort', 'deutsch', 'ich habe', 'brauche', 'können', 'guten tag'],
             'pt': ['olá', 'obrigado', 'por favor', 'ajuda', 'problema', 'senha', 'português', 'tenho', 'preciso', 'pode', 'bom dia'],
@@ -251,18 +251,18 @@ class LanguageSupport:
     def get_language_prompt(self, user_language: str) -> str:
         """Get language-specific prompt for AI responses"""
         prompts = {
-            'es': "Responde en español. Eres un asistente de soporte técnico IT.",
-            'fr': "Répondez en français. Vous êtes un assistant de support technique IT.",
-            'de': "Antworte auf Deutsch. Du bist ein IT-Support-Assistent.",
-            'zh': "用中文回答。你是一个IT技术支持助手。",
-            'ja': "日本語で答えてください。あなたはITサポートアシスタントです。",
-            'ar': "أجب باللغة العربية. أنت مساعد دعم تقني IT.",
-            'ru': "Отвечай на русском языке. Ты помощник IT-поддержки.",
-            'hi': "हिंदी में जवाब दें। आप एक IT सपोर्ट असिस्टेंट हैं।",
-            'pt': "Responda em português. Você é um assistente de suporte técnico IT.",
-            'it': "Rispondi in italiano. Sei un assistente di supporto tecnico IT.",
-            'nl': "Antwoord in het Nederlands. Je bent een IT-ondersteuningsassistent.",
-            'ko': "한국어로 답하세요. 당신은 IT 지원 도우미입니다."
+            'es': "IMPORTANTE: Responde SIEMPRE en español. Eres un asistente de soporte técnico IT que debe proporcionar respuestas completas en español con pasos numerados y un tono profesional pero amigable.",
+            'fr': "IMPORTANT: Répondez TOUJOURS en français. Vous êtes un assistant de support technique IT qui doit fournir des réponses complètes en français avec des étapes numérotées et un ton professionnel mais amical.",
+            'de': "WICHTIG: Antworte IMMER auf Deutsch. Du bist ein IT-Support-Assistent, der vollständige Antworten auf Deutsch mit nummerierten Schritten und einem professionellen aber freundlichen Ton geben muss.",
+            'zh': "重要提示：始终用中文回答。你是一个IT技术支持助手，必须用中文提供完整的回答，包含编号步骤和专业而友好的语调。",
+            'ja': "重要：必ず日本語で答えてください。あなたはITサポートアシスタントで、番号付きの手順と専門的で親しみやすい口調で日本語で完全な回答を提供する必要があります。",
+            'ar': "مهم: أجب دائماً باللغة العربية. أنت مساعد دعم تقني IT يجب أن يقدم إجابات كاملة باللغة العربية مع خطوات مرقمة ونبرة مهنية ولكن ودودة.",
+            'ru': "ВАЖНО: Всегда отвечай на русском языке. Ты помощник IT-поддержки, который должен предоставлять полные ответы на русском языке с пронумерованными шагами и профессиональным, но дружелюбным тоном.",
+            'hi': "महत्वपूर्ण: हमेशा हिंदी में जवाब दें। आप एक IT सपोर्ट असिस्टेंट हैं जिन्हें संख्या दिए गए चरणों और पेशेवर लेकिन मित्रवत स्वर के साथ हिंदी में पूरे उत्तर देने चाहिए।",
+            'pt': "IMPORTANTE: Responda SEMPRE em português. Você é um assistente de suporte técnico IT que deve fornecer respostas completas em português com etapas numeradas e tom profissional mas amigável.",
+            'it': "IMPORTANTE: Rispondi SEMPRE in italiano. Sei un assistente di supporto tecnico IT che deve fornire risposte complete in italiano con passaggi numerati e tono professionale ma amichevole.",
+            'nl': "BELANGRIJK: Antwoord ALTIJD in het Nederlands. Je bent een IT-ondersteuningsassistent die volledige antwoorden in het Nederlands moet geven met genummerde stappen en een professionele maar vriendelijke toon.",
+            'ko': "중요: 항상 한국어로 답하세요. 당신은 번호가 매겨진 단계와 전문적이지만 친근한 어조로 한국어로 완전한 답변을 제공해야 하는 IT 지원 도우미입니다."
         }
         
         return prompts.get(user_language, "Respond in English. You are an IT support assistant.")

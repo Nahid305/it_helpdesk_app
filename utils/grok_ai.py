@@ -38,9 +38,9 @@ class GrokAIService:
             headers['OpenAI-Organization'] = self.org_id
         return headers
     
-    def _get_helpdesk_system_prompt(self) -> str:
+    def _get_helpdesk_system_prompt(self, language_prompt: str = None) -> str:
         """Get the system prompt for helpdesk-specific responses."""
-        return """You are an expert IT Helpdesk Assistant for a global corporation. Your role is to:
+        base_prompt = """You are an expert IT Helpdesk Assistant for a global corporation. Your role is to:
 
 1. **Provide immediate technical support** for common IT issues including:
    - Network connectivity problems
@@ -77,6 +77,11 @@ class GrokAIService:
    - Warn about potential security risks
 
 Always maintain a helpful, solution-oriented approach while ensuring users feel supported and confident in implementing your suggestions."""
+        
+        # Add language instruction at the beginning if provided
+        if language_prompt:
+            return f"{language_prompt}\n\n{base_prompt}"
+        return base_prompt
 
     def chat_completion(self, messages: List[Dict[str, str]], user_context: Dict[str, Any] = None) -> str:
         """
@@ -91,19 +96,16 @@ Always maintain a helpful, solution-oriented approach while ensuring users feel 
         """
         try:
             # Prepare the system message with helpdesk context
+            language_prompt = user_context.get('language_prompt') if user_context else None
             system_message = {
                 "role": "system",
-                "content": self._get_helpdesk_system_prompt()
+                "content": self._get_helpdesk_system_prompt(language_prompt)
             }
             
             # Add user context if provided
             if user_context:
                 context_info = f"\nUser Context: Username: {user_context.get('username', 'N/A')}, ID: {user_context.get('user_id', 'N/A')}, Email: {user_context.get('email', 'N/A')}"
                 system_message["content"] += context_info
-                
-                # Add language-specific instructions if available
-                if 'language_prompt' in user_context and user_context['language_prompt']:
-                    system_message["content"] = user_context['language_prompt'] + "\n\n" + system_message["content"]
             
             # Prepare the full message list
             full_messages = [system_message] + messages
