@@ -25,8 +25,8 @@ class GrokAIService:
         self.model = os.getenv('GROK_MODEL', 'grok-beta')
         self.org_id = os.getenv('GROK_ORG_ID')
         
-        if not self.api_key:
-            raise ValueError("GROK_API_KEY not found in environment variables")
+        if not self.api_key or self.api_key.strip() == '' or self.api_key == 'your_grok_api_key_here':
+            raise ValueError("GROK_API_KEY not found in environment variables or is placeholder value")
     
     def _get_headers(self) -> Dict[str, str]:
         """Get headers for API requests."""
@@ -132,28 +132,70 @@ Always maintain a helpful, solution-oriented approach while ensuring users feel 
                 return data['choices'][0]['message']['content'].strip()
             else:
                 # Fallback to dummy response if API fails
-                return self._get_fallback_response(messages[-1]['content'] if messages else "")
+                return self._get_fallback_response(messages[-1]['content'] if messages else "", user_context)
                 
         except Exception as e:
             # Fallback to dummy response on any error
-            return self._get_fallback_response(messages[-1]['content'] if messages else "")
+            return self._get_fallback_response(messages[-1]['content'] if messages else "", user_context)
     
-    def _get_fallback_response(self, user_query: str) -> str:
+    def _get_fallback_response(self, user_query: str, user_context: Dict[str, Any] = None) -> str:
         """Provide a fallback response when AI service is unavailable."""
-        fallback_responses = {
-            "password": "I can help you reset your password. Please go to the company login portal, click 'Forgot Password', enter your registered email, and follow the reset link sent to your email to set a new secure password.",
-            "vpn": "To install the VPN client: Open the company software center, search for 'Corporate VPN Client', click 'Install' and wait for completion, then launch the VPN app, log in with your credentials, and click 'Connect'.",
-            "email": "For email issues, try restarting your email client first. If that doesn't work, check your internet connection and verify your email settings. You may also try logging out and back into your email account.",
-            "printer": "For printer issues: Check if the printer is powered on and connected to the network, ensure you have the latest printer drivers installed, clear any paper jams, and try printing a test page. If issues persist, restart both your computer and the printer.",
-            "network": "For network connectivity issues: Check if your ethernet cable is properly connected, restart your router/modem, try connecting to a different network, and run the network troubleshooter from your system settings."
-        }
+        
+        # Get user language from context
+        user_language = user_context.get('language', 'en') if user_context else 'en'
+        user_name = user_context.get('username', 'User') if user_context else 'User'
+        
+        # Language-specific fallback responses
+        if user_language == 'es':
+            fallback_responses = {
+                "password": f"Hola {user_name}, puedo ayudarte a restablecer tu contraseña. Ve al portal de inicio de sesión de la empresa, haz clic en 'Olvidé mi contraseña', ingresa tu email registrado y sigue el enlace de restablecimiento enviado a tu correo para crear una nueva contraseña segura.",
+                "vpn": f"Hola {user_name}, para instalar el cliente VPN: Abre el centro de software de la empresa, busca 'Cliente VPN Corporativo', haz clic en 'Instalar' y espera la descarga, luego inicia la aplicación VPN, inicia sesión con tus credenciales y haz clic en 'Conectar'.",
+                "email": f"Para problemas de correo, {user_name}, intenta reiniciar tu cliente de correo primero. Si eso no funciona, verifica tu conexión a internet y las configuraciones de email. También puedes intentar cerrar sesión y volver a iniciar sesión en tu cuenta de correo.",
+                "printer": f"Para problemas de impresora: Verifica que la impresora esté encendida y conectada a la red, asegúrate de tener los controladores más recientes instalados, limpia cualquier atasco de papel e intenta imprimir una página de prueba. Si persisten los problemas, reinicia tanto tu computadora como la impresora.",
+                "network": f"Para problemas de conectividad de red: Verifica que tu cable ethernet esté conectado correctamente, reinicia tu router/módem, intenta conectarte a una red diferente y ejecuta el solucionador de problemas de red desde la configuración del sistema."
+            }
+            error_note = "💡 *Nota: El servicio de IA está actualmente limitado. Si esto no resuelve tu problema, por favor crea un ticket de soporte para asistencia personalizada.*"
+        else:
+            fallback_responses = {
+                "password": f"Hello {user_name}, I can help you reset your password. Please go to the company login portal, click 'Forgot Password', enter your registered email, and follow the reset link sent to your email to set a new secure password.",
+                "vpn": f"Hello {user_name}, to install the VPN client: Open the company software center, search for 'Corporate VPN Client', click 'Install' and wait for completion, then launch the VPN app, log in with your credentials, and click 'Connect'.",
+                "email": f"For email issues, {user_name}, try restarting your email client first. If that doesn't work, check your internet connection and verify your email settings. You may also try logging out and back into your email account.",
+                "printer": f"For printer issues: Check if the printer is powered on and connected to the network, ensure you have the latest printer drivers installed, clear any paper jams, and try printing a test page. If issues persist, restart both your computer and the printer.",
+                "network": f"For network connectivity issues: Check if your ethernet cable is properly connected, restart your router/modem, try connecting to a different network, and run the network troubleshooter from your system settings."
+            }
+            error_note = "💡 *Note: AI service is currently limited. If this doesn't resolve your issue, please create a support ticket for personalized assistance.*"
         
         query_lower = user_query.lower()
         for keyword, response in fallback_responses.items():
             if keyword in query_lower:
-                return f"🔧 **Quick Solution for {keyword.title()} Issue:**\n\n{response}\n\n💡 *Note: AI service is currently limited. If this doesn't resolve your issue, please create a support ticket for personalized assistance.*"
+                return f"🔧 **{_get_translated_title(keyword, user_language)}:**\n\n{response}\n\n{error_note}"
         
-        return "I understand you need help with an IT issue. While I'm currently operating in limited mode, I recommend creating a support ticket so our technical team can provide you with detailed assistance. In the meantime, try restarting your device or application, which resolves many common issues."
+        if user_language == 'es':
+            return f"Hola {user_name}, entiendo que necesitas ayuda con un problema de IT. Aunque actualmente estoy operando en modo limitado, recomiendo crear un ticket de soporte para que nuestro equipo técnico pueda brindarte asistencia detallada. Mientras tanto, intenta reiniciar tu dispositivo o aplicación, lo cual resuelve muchos problemas comunes."
+        else:
+            return f"Hello {user_name}, I understand you need help with an IT issue. While I'm currently operating in limited mode, I recommend creating a support ticket so our technical team can provide you with detailed assistance. In the meantime, try restarting your device or application, which resolves many common issues."
+
+def _get_translated_title(keyword: str, language: str) -> str:
+    """Get translated title for issue types."""
+    titles = {
+        'es': {
+            'password': 'Solución Rápida para Problema de Contraseña',
+            'vpn': 'Solución Rápida para Problema de VPN',
+            'email': 'Solución Rápida para Problema de Correo',
+            'printer': 'Solución Rápida para Problema de Impresora',
+            'network': 'Solución Rápida para Problema de Red'
+        },
+        'en': {
+            'password': 'Quick Solution for Password Issue',
+            'vpn': 'Quick Solution for VPN Issue',
+            'email': 'Quick Solution for Email Issue',
+            'printer': 'Quick Solution for Printer Issue',
+            'network': 'Quick Solution for Network Issue'
+        }
+    }
+    
+    lang_titles = titles.get(language, titles['en'])
+    return lang_titles.get(keyword, f"Quick Solution for {keyword.title()} Issue")
 
     def generate_ticket_summary(self, chat_history: List[Dict[str, str]], user_context: Dict[str, Any] = None) -> str:
         """Generate a comprehensive ticket summary from chat history."""
