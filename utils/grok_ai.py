@@ -3,6 +3,13 @@ import json
 import requests
 from typing import List, Dict, Any
 
+# Try to import streamlit for secrets support
+try:
+    import streamlit as st
+    STREAMLIT_AVAILABLE = True
+except ImportError:
+    STREAMLIT_AVAILABLE = False
+
 # Load environment variables from .env file if it exists
 def load_env_vars():
     """Load environment variables from .env file"""
@@ -15,18 +22,32 @@ def load_env_vars():
                     key, value = line.split('=', 1)
                     os.environ[key.strip()] = value.strip()
 
+def get_config_value(key: str, default: str = None):
+    """Get configuration value from environment variables or Streamlit secrets"""
+    # First try environment variables
+    value = os.getenv(key, default)
+    
+    # If not found and Streamlit is available, try secrets
+    if not value and STREAMLIT_AVAILABLE:
+        try:
+            value = st.secrets.get(key, default)
+        except:
+            pass
+    
+    return value
+
 # Load environment variables
 load_env_vars()
 
 class GrokAIService:
     def __init__(self):
-        self.api_key = os.getenv('GROK_API_KEY')
-        self.api_url = os.getenv('GROK_API_URL', 'https://api.x.ai/v1')
-        self.model = os.getenv('GROK_MODEL', 'grok-beta')
-        self.org_id = os.getenv('GROK_ORG_ID')
+        self.api_key = get_config_value('GROK_API_KEY')
+        self.api_url = get_config_value('GROK_API_URL', 'https://api.x.ai/v1')
+        self.model = get_config_value('GROK_MODEL', 'grok-beta')
+        self.org_id = get_config_value('GROK_ORG_ID')
         
         if not self.api_key:
-            raise ValueError("GROK_API_KEY not found in environment variables")
+            raise ValueError("GROK_API_KEY not found in environment variables or Streamlit secrets")
     
     def _get_headers(self) -> Dict[str, str]:
         """Get headers for API requests."""
@@ -140,7 +161,7 @@ Always maintain a helpful, solution-oriented approach while ensuring users feel 
         """Provide a fallback response when AI service is unavailable."""
         fallback_responses = {
             "password": "I can help you reset your password. Please go to the company login portal, click 'Forgot Password', enter your registered email, and follow the reset link sent to your email to set a new secure password.",
-            "vpn": "To install the VPN client: Open the company software center, search for 'Corporate VPN Client', click 'Install' and wait for completion, then launch the VPN app, log in with your credentials, and click 'Connect'.",
+            "vpn": "**Steps to install VPN:**\n1. Open company software center\n2. Search for 'Corporate VPN Client'\n3. Click 'Install' and wait for completion\n4. Launch VPN app and log in with your credentials\n5. Click 'Connect'",
             "email": "For email issues, try restarting your email client first. If that doesn't work, check your internet connection and verify your email settings. You may also try logging out and back into your email account.",
             "printer": "For printer issues: Check if the printer is powered on and connected to the network, ensure you have the latest printer drivers installed, clear any paper jams, and try printing a test page. If issues persist, restart both your computer and the printer.",
             "network": "For network connectivity issues: Check if your ethernet cable is properly connected, restart your router/modem, try connecting to a different network, and run the network troubleshooter from your system settings."
@@ -149,7 +170,7 @@ Always maintain a helpful, solution-oriented approach while ensuring users feel 
         query_lower = user_query.lower()
         for keyword, response in fallback_responses.items():
             if keyword in query_lower:
-                return f"🔧 **Quick Solution for {keyword.title()} Issue:**\n\n{response}\n\n💡 *Note: AI service is currently limited. If this doesn't resolve your issue, please create a support ticket for personalized assistance.*"
+                return f"🔧 **Quick Solution for {keyword.title()} Issue:**\n\n{response}\n\n<p style='font-size: 0.8rem; color: #003d82; margin: 0;'>Note: This is AI-generated content kindly evaluate the message</p>"
         
         return "I understand you need help with an IT issue. While I'm currently operating in limited mode, I recommend creating a support ticket so our technical team can provide you with detailed assistance. In the meantime, try restarting your device or application, which resolves many common issues."
 

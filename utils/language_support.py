@@ -173,7 +173,7 @@ class LanguageSupport:
         # Simple keyword-based detection with scoring
         language_indicators = {
             'it': ['ciao', 'grazie', 'per favore', 'aiuto', 'problema', 'password', 'italiano', 'ho', 'bisogno', 'può', 'salve', 'buongiorno'],
-            'es': ['hola', 'gracias', 'por favor', 'ayuda', 'problema', 'contraseña', 'español', 'tengo', 'necesito', 'puede', 'buenos días'],
+            'es': ['hola', 'gracias', 'por favor', 'ayuda', 'problema', 'contraseña', 'español', 'tengo', 'necesito', 'puede', 'buenos días', 'quiero', 'instalar', 'como', 'donde', 'que', 'soy', 'estoy', 'mi', 'tu', 'su', 'este', 'esta'],
             'fr': ['bonjour', 'merci', 's\'il vous plaît', 'aide', 'problème', 'mot de passe', 'français', 'j\'ai', 'besoin', 'pouvez', 'salut'],
             'de': ['hallo', 'danke', 'bitte', 'hilfe', 'problem', 'passwort', 'deutsch', 'ich habe', 'brauche', 'können', 'guten tag'],
             'pt': ['olá', 'obrigado', 'por favor', 'ajuda', 'problema', 'senha', 'português', 'tenho', 'preciso', 'pode', 'bom dia'],
@@ -213,18 +213,18 @@ class LanguageSupport:
     def get_language_prompt(self, user_language: str) -> str:
         """Get language-specific prompt for AI responses"""
         prompts = {
-            'es': "Responde en español. Eres un asistente de soporte técnico IT.",
-            'fr': "Répondez en français. Vous êtes un assistant de support technique IT.",
-            'de': "Antworte auf Deutsch. Du bist ein IT-Support-Assistent.",
-            'zh': "用中文回答。你是一个IT技术支持助手。",
-            'ja': "日本語で答えてください。あなたはITサポートアシスタントです。",
-            'ar': "أجب باللغة العربية. أنت مساعد دعم تقني IT.",
-            'ru': "Отвечай на русском языке. Ты помощник IT-поддержки.",
-            'hi': "हिंदी में जवाब दें। आप एक IT सपोर्ट असिस्टेंट हैं।",
-            'pt': "Responda em português. Você é um assistente de suporte técnico IT.",
-            'it': "Rispondi in italiano. Sei un assistente di supporto tecnico IT.",
-            'nl': "Antwoord in het Nederlands. Je bent een IT-ondersteuningsassistent.",
-            'ko': "한국어로 답하세요. 당신은 IT 지원 도우미입니다."
+            'es': "IMPORTANTE: Responde SIEMPRE en español. Eres un asistente de soporte técnico IT. Traduce toda tu respuesta al español, incluyendo títulos, pasos y notas. Usa términos técnicos en español cuando sea posible.",
+            'fr': "IMPORTANT: Répondez TOUJOURS en français. Vous êtes un assistant de support technique IT. Traduisez toute votre réponse en français.",
+            'de': "WICHTIG: Antworte IMMER auf Deutsch. Du bist ein IT-Support-Assistent. Übersetze deine gesamte Antwort ins Deutsche.",
+            'zh': "重要：始终用中文回答。你是一个IT技术支持助手。将你的整个回答翻译成中文。",
+            'ja': "重要：必ず日本語で答えてください。あなたはITサポートアシスタントです。回答全体を日本語に翻訳してください。",
+            'ar': "مهم: أجب دائماً باللغة العربية. أنت مساعد دعم تقني IT. ترجم إجابتك كاملة إلى العربية.",
+            'ru': "ВАЖНО: Всегда отвечай на русском языке. Ты помощник IT-поддержки. Переводи весь свой ответ на русский язык.",
+            'hi': "महत्वपूर्ण: हमेशा हिंदी में जवाब दें। आप एक IT सपोर्ट असिस्टेंट हैं। अपना पूरा उत्तर हिंदी में अनुवाद करें।",
+            'pt': "IMPORTANTE: Responda SEMPRE em português. Você é um assistente de suporte técnico IT. Traduza toda sua resposta para o português.",
+            'it': "IMPORTANTE: Rispondi SEMPRE in italiano. Sei un assistente di supporto tecnico IT. Traduci tutta la tua risposta in italiano.",
+            'nl': "BELANGRIJK: Antwoord ALTIJD in het Nederlands. Je bent een IT-ondersteuningsassistent. Vertaal je hele antwoord naar het Nederlands.",
+            'ko': "중요: 항상 한국어로 답하세요. 당신은 IT 지원 도우미입니다. 전체 답변을 한국어로 번역하세요."
         }
         
         return prompts.get(user_language, "Respond in English. You are an IT support assistant.")

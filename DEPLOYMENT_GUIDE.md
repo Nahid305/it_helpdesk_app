@@ -24,7 +24,7 @@ The following files have been removed for clean deployment:
 
 2. **Initialize Git repository**:
    ```bash
-   cd "c:\Users\svc_papps_git_wflow\Downloads\it_helpdesk_app"
+   cd /path/to/your/it_helpdesk_app
    git init
    git add .
    git commit -m "Initial commit: Clean IT Helpdesk application"

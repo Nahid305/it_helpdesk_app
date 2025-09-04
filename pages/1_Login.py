@@ -3,7 +3,7 @@ from utils.auth import authenticate
 
 # Enhanced page configuration
 st.set_page_config(
-    page_title="🌱 EcoDesk Login",
+    page_title="KIITOS- Global IT Support Login",
     page_icon="🔐",
     layout="centered",
     initial_sidebar_state="collapsed"  # Hide sidebar navigation
@@ -74,7 +74,7 @@ section[data-testid="stSidebar"] {
 # Simple header
 st.markdown("""
 <div class="login-header">
-    <h1>🔐 IT Helpdesk Login</h1>
+    <h1>KIITOS - Global IT Support Assistant</h1>
     <p style="color: #000; font-size: 1.1rem;">Please log in to access IT support services</p>
 </div>
 """, unsafe_allow_html=True)
@@ -134,7 +134,7 @@ if st.session_state.get('logged_in', False):
             st.switch_page("pages/3_Ticket.py")
 
 else:
-    st.markdown("### 🔑 Login")
+    st.markdown("### Login")
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
     login_btn = st.button("Login")
