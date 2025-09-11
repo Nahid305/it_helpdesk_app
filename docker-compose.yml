@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  it-helpdesk:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    environment:
+      - GROK_API_KEY=${GROK_API_KEY}
+      - GROK_API_URL=${GROK_API_URL:-https://api.x.ai/v1}
+      - GROK_MODEL=${GROK_MODEL:-grok-beta}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - APP_NAME=${APP_NAME:-IT Helpdesk}
+      - DEBUG=${DEBUG:-false}
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - helpdesk-network
+
+networks:
+  helpdesk-network:
+    driver: bridge

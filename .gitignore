@@ -69,10 +69,8 @@ comprehensive_test.py
 *.bak
 *.backup
 
-# Docker (not needed for Streamlit Cloud)
-Dockerfile*
-docker-compose*.yml
-.dockerignore
+# Kubernetes backup files
+k8s/*.bak
 
 # Build files
 build.bat

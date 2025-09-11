@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: it-helpdesk-app
+  namespace: it-helpdesk
+  labels:
+    app: it-helpdesk
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: it-helpdesk
+  template:
+    metadata:
+      labels:
+        app: it-helpdesk
+    spec:
+      containers:
+      - name: it-helpdesk
+        image: your-registry.azurecr.io/it-helpdesk:latest
+        ports:
+        - containerPort: 8501
+        envFrom:
+        - secretRef:
+            name: it-helpdesk-secrets
+        volumeMounts:
+        - name: data-volume
+          mountPath: /app/data
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 250m
+            memory: 256Mi
+        livenessProbe:
+          httpGet:
+            path: /_stcore/health
+            port: 8501
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          timeoutSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /_stcore/health
+            port: 8501
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+      volumes:
+      - name: data-volume
+        persistentVolumeClaim:
+          claimName: it-helpdesk-data
+      imagePullSecrets:
+      - name: acr-secret
