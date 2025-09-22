@@ -1,31 +1,14 @@
-version: '3.8'
-
-services:
-  it-helpdesk:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8501:8501"
-    environment:
-      - GROK_API_KEY=${GROK_API_KEY}
-      - GROK_API_URL=${GROK_API_URL:-https://api.x.ai/v1}
-      - GROK_MODEL=${GROK_MODEL:-grok-beta}
-      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
-      - APP_NAME=${APP_NAME:-IT Helpdesk}
-      - DEBUG=${DEBUG:-false}
-    volumes:
-      - ./data:/app/data
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-    networks:
-      - helpdesk-network
-
-networks:
-  helpdesk-network:
-    driver: bridge
+- name: Deploy to Azure Container Apps
+  uses: azure/container-apps-deploy-action@v2
+  with:
+    appSourcePath: ./  # Root of your app
+    dockerfilePath: ./Dockerfile
+    imageToBuild: <your-acr-name>.azurecr.io/it-helpdesk:${{ github.sha }}
+    registryUrl: <your-acr-name>.azurecr.io
+    registryUsername: ${{ secrets.ACR_USERNAME }}
+    registryPassword: ${{ secrets.ACR_PASSWORD }}
+    containerAppName: cxchatbot
+    resourceGroup: rg-cxchatbot
+    containerAppEnvironment: managedEnvironment-rgcxchatbot-ba2e
+    targetPort: 8501
+    ingress: external
