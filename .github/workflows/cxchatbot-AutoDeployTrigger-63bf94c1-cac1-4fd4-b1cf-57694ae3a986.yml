@@ -1,49 +1,15 @@
-name: Trigger auto deployment for cxchatbot
 
-# When this action will be executed
-on:
-  # Automatically trigger it when detected changes in repo
-  push:
-    branches: 
-      [ main ]
-    paths:
-    - '**'
-    - '.github/workflows/cxchatbot-AutoDeployTrigger-63bf94c1-cac1-4fd4-b1cf-57694ae3a986.yml'
-
-  # Allow manual trigger 
-  workflow_dispatch:      
-
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    permissions: 
-      id-token: write #This is required for requesting the OIDC JWT Token
-      contents: read #Required when GH token is used to authenticate with private repo
-
-    steps:
-      - name: Checkout to the branch
-        uses: actions/checkout@v2
-
-      - name: Azure Login
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.CXCHATBOT_AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.CXCHATBOT_AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.CXCHATBOT_AZURE_SUBSCRIPTION_ID }}
-
-      - name: Build and push container image to registry
-        uses: azure/container-apps-deploy-action@v2
-        with:
-          appSourcePath: ${{ github.workspace }}
-          _dockerfilePathKey_: _dockerfilePath_
-          _targetLabelKey_: _targetLabel_
-          registryUrl: 
-          registryUsername: ${{ secrets.CXCHATBOT_REGISTRY_USERNAME }}
-          registryPassword: ${{ secrets.CXCHATBOT_REGISTRY_PASSWORD }}
-          containerAppName: cxchatbot
-          resourceGroup: rg-cxchatbot
-          imageToBuild: default/[parameters('containerAppName')]:${{ github.sha }}
-          _buildArgumentsKey_: |
-            _buildArgumentsValues_
-
-
+- name: Deploy to Azure Container Apps
+  uses: azure/container-apps-deploy-action@v2
+  with:
+    appSourcePath: ./  # Root of your app
+    dockerfilePath: ./Dockerfile
+    imageToBuild: <cxchatbot>.azurecr.io/it-helpdesk:${{ github.sha }}
+    registryUrl: <cxchatbot>.azurecr.io
+    registryUsername: ${{ secrets.nahid }}
+    registryPassword: ${{ secrets.Dofa369594}}
+    containerAppName: cxchatbot
+    resourceGroup: rg-cxchatbot
+    containerAppEnvironment: managedEnvironment-rgcxchatbot-ba2e
+    targetPort: 8501
+    ingress: external
