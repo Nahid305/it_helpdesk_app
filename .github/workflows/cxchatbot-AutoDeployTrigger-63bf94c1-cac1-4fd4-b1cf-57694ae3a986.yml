@@ -1,4 +1,4 @@
-- name: Deploy to Azure Container Apps
+  name: Deploy to Azure Container Apps
   uses: azure/container-apps-deploy-action@v2
   with:
     appSourcePath: ./  # Root of your app
@@ -12,3 +12,4 @@
     containerAppEnvironment: managedEnvironment-rgcxchatbot-ba2e
     targetPort: 8501
     ingress: external
+
