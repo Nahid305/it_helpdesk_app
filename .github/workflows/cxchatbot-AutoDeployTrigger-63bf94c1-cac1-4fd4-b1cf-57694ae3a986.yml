@@ -5,13 +5,14 @@
     dockerfilePath: ./Dockerfile
     imageToBuild: ca589993a5bdacr.azurecr.io/it-helpdesk:${{ github.sha }}
     registryUrl: ca589993a5bdacr.azurecr.io
-    registryUsername: ${{ secrets.ACR_USERNAME }}
-    registryPassword: ${{ secrets.ACR_PASSWORD }}
+    registryUsername: ${{ secrets.nahid }}
+    registryPassword: ${{ secrets.Dofa369594 }}
     containerAppName: cxchatbot
     resourceGroup: rg-cxchatbot
     containerAppEnvironment: managedEnvironment-rgcxchatbot-ba2e
     targetPort: 8501
     ingress: external
+
 
 
 
