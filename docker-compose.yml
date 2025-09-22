@@ -1,14 +1,1 @@
-- name: Deploy to Azure Container Apps
-  uses: azure/container-apps-deploy-action@v2
-  with:
-    appSourcePath: ./  # Root of your app
-    dockerfilePath: ./Dockerfile
-    imageToBuild: <your-acr-name>.azurecr.io/it-helpdesk:${{ github.sha }}
-    registryUrl: <your-acr-name>.azurecr.io
-    registryUsername: ${{ secrets.ACR_USERNAME }}
-    registryPassword: ${{ secrets.ACR_PASSWORD }}
-    containerAppName: cxchatbot
-    resourceGroup: rg-cxchatbot
-    containerAppEnvironment: managedEnvironment-rgcxchatbot-ba2e
-    targetPort: 8501
-    ingress: external
+
