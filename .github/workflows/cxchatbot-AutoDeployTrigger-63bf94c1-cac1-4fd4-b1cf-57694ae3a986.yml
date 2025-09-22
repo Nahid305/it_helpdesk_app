@@ -3,8 +3,8 @@
   with:
     appSourcePath: ./  # Root of your app
     dockerfilePath: ./Dockerfile
-    imageToBuild: cxchatbotacr.azurecr.io/it-helpdesk:${{ github.sha }}
-    registryUrl: cxchatbotacr.azurecr.io
+    imageToBuild: ca589993a5bdacr.azurecr.io/it-helpdesk:${{ github.sha }}
+    registryUrl: ca589993a5bdacr.azurecr.io
     registryUsername: ${{ secrets.ACR_USERNAME }}
     registryPassword: ${{ secrets.ACR_PASSWORD }}
     containerAppName: cxchatbot
@@ -12,5 +12,6 @@
     containerAppEnvironment: managedEnvironment-rgcxchatbot-ba2e
     targetPort: 8501
     ingress: external
+
 
 
