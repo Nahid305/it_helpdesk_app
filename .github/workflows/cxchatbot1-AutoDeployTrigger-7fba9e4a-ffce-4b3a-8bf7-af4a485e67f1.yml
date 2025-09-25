@@ -37,13 +37,14 @@ jobs:
           appSourcePath: ${{ github.workspace }}
           _dockerfilePathKey_: _dockerfilePath_
           _targetLabelKey_: _targetLabel_
-          registryUrl: 
+          registryUrl: kmchatbotacr.azurecr.io
           registryUsername: ${{ secrets.CXCHATBOT1_REGISTRY_USERNAME }}
           registryPassword: ${{ secrets.CXCHATBOT1_REGISTRY_PASSWORD }}
           containerAppName: cxchatbot1
           resourceGroup: rg-cxchatbot
-          imageToBuild: default/[parameters('containerAppName')]:${{ github.sha }}
+          imageToBuild: kmchatbotacr.azurecr.io/it-helpdesk:${{ github.sha }}
           _buildArgumentsKey_: |
             _buildArgumentsValues_
+
 
 
