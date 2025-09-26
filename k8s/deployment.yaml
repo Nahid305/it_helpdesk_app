@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: it-helpdesk
-        image: your-registry.azurecr.io/it-helpdesk:latest
+        image: kmchatbotacr.azurecr.io/it-helpdesk:latest
         ports:
         - containerPort: 8501
         envFrom:
